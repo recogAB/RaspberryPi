@@ -2,13 +2,13 @@ import cv2
 from pyzbar.pyzbar import decode
 
 cap = cv2.VideoCapture("/dev/video10")
-cap.set(3,1920)  #width
-cap.set(4,1080)  #height
+cap.set(3,1280)  #width
+cap.set(4,720)  #height
 camera = True
 while camera == True:
     success, frame = cap.read()
 
-    for conde in decode(frame):
+    for code in decode(frame):
         print(code.type)
         print(code.data.decode('utf-8'))
 
