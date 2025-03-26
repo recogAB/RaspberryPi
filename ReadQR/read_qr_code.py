@@ -1,7 +1,7 @@
 import cv2
 from pyzbar.pyzbar import decode
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture("/dev/video10")
 cap.set(3,4608)  #width
 cap.set(4,2592)  #height
 camera = True
