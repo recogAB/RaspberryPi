@@ -1,0 +1,6 @@
+{
+    "sensorId":"Test Terminal",
+    "sensorType":"Vibration",
+    "sensorValueString":"test Terminal",
+    "sensorValueNumber":98
+}
