@@ -1,0 +1,6 @@
+{
+    "sample_time":0.1,
+    "avrage_time":5, 
+    "send_time":60, 
+    "swap_threshold":0.7
+}
