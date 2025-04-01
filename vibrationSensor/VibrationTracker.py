@@ -21,7 +21,8 @@ class VibrationTracker:
         pass
 
     def update_state(self, is_vibrating):
-        self.vib_state_list[self.counter] = is_vibrating
+        list_counter = self.counter % self.sample_ticks
+        self.vib_state_list[list_counter] = is_vibrating
         self.update_machine_state()
         self.counter += 1
         if self.counter % self.send_ticks == 0:
