@@ -25,5 +25,14 @@ class MultiplexerHandler:
             GPIO.output(port, GPIO.LOW)
         # else port is probably in use
 
-    def set_port
-        
+    def set_sens(self, sens_index):
+        bit_list = self.sensor_to_port_matrix[sens_index]
+        for i in range(len(bit_list)):
+            bit = bit_list[i]
+            port = self.controll_out_ports[i]
+            if bit == 1:
+                GPIO.output(port, GPIO.HIGH)
+            else:
+                GPIO.output(port, GPIO.LOW)
+        self.active_sensor = sens_index
+
