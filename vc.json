@@ -1,0 +1,220 @@
+{
+    "missions": [
+      {
+        "id": "MainMission", 
+        "enabled": true, 
+        "priority": 10, 
+        "activator": "Triggered", 
+        "limit_occurrences": false, 
+        "signal_component": "Mission Controller", 
+        "signal_name": "TriggerSignal", 
+        "accepted_resources": "Any", 
+        "steps": [
+          {
+            "type": "Collect", 
+            "scope": "Any process by id", 
+            "process_group_id": "S1", 
+            "optional_step": false, 
+            "collect_all": false
+          }, 
+          {
+            "type": "Move", 
+            "move_to": "Component/Frame", 
+            "component": "ViaPoint1", 
+            "position_frame": "", 
+            "align_to_target": false
+          }, 
+          {
+            "type": "CallMission", 
+            "mission_to_call": "Enter Door 1"
+          }, 
+          {
+            "type": "CallMission", 
+            "mission_to_call": "Robot Process"
+          }, 
+          {
+            "type": "CallMission", 
+            "mission_to_call": "Enter Door 2"
+          }, 
+          {
+            "type": "Work", 
+            "scope": "Any process by id", 
+            "process_group_id": "P1", 
+            "optional_step": false
+          }, 
+          {
+            "type": "Work", 
+            "scope": "Any process by id", 
+            "process_group_id": "P2", 
+            "optional_step": false
+          }, 
+          {
+            "type": "Work", 
+            "scope": "Any process by id", 
+            "process_group_id": "P3", 
+            "optional_step": false
+          }, 
+          {
+            "type": "Move", 
+            "move_to": "Component/Frame", 
+            "component": "ViaPoint3", 
+            "position_frame": "", 
+            "align_to_target": false
+          }, 
+          {
+            "type": "CallMission", 
+            "mission_to_call": "Enter Door 3"
+          }, 
+          {
+            "type": "Deliver", 
+            "scope": "Any process by id", 
+            "process_group_id": "Return", 
+            "deliver_all": false
+          }, 
+          {
+            "type": "Charge", 
+            "charging_locations": [
+              "Zetha Charger", 
+              " Zetha Charger #2", 
+              " Zetha Charger #3"
+            ], 
+            "to_charge_limit": 0.2, 
+            "charge_until_limit": 0.8
+          }
+        ]
+      }, 
+      {
+        "id": "Enter Door 1", 
+        "enabled": false, 
+        "steps": [
+          {
+            "type": "SendSignal", 
+            "component": "Rolling Steel Door #1", 
+            "boolean_signal": "IN_J1_Action", 
+            "signal_value": true
+          }, 
+          {
+            "type": "WaitSignal", 
+            "component": "Rolling Steel Door #1", 
+            "boolean_signal": "OUT_J1_UpState", 
+            "signal_value": true, 
+            "wait_trigger": false, 
+            "timeout": 0.0
+          }, 
+          {
+            "type": "Move", 
+            "move_to": "Component/Frame", 
+            "component": "Arrow", 
+            "position_frame": "Sensor", 
+            "align_to_target": true
+          }, 
+          {
+            "type": "SendSignal", 
+            "component": "Rolling Steel Door #1", 
+            "boolean_signal": "IN_J1_Action", 
+            "signal_value": false
+          }, 
+          {
+            "type": "WaitSignal", 
+            "component": "Rolling Steel Door #1", 
+            "boolean_signal": "OUT_J1_DownState", 
+            "signal_value": true, 
+            "wait_trigger": false, 
+            "timeout": 0.0
+          }
+        ]
+      }, 
+      {
+        "id": "Enter Door 2", 
+        "enabled": false, 
+        "steps": [
+          {
+            "type": "SendSignal", 
+            "component": "Rolling Steel Door #2", 
+            "boolean_signal": "IN_J1_Action", 
+            "signal_value": true
+          }, 
+          {
+            "type": "WaitSignal", 
+            "component": "Rolling Steel Door #2", 
+            "boolean_signal": "OUT_J1_UpState", 
+            "signal_value": true, 
+            "wait_trigger": false, 
+            "timeout": 0.0
+          }, 
+          {
+            "type": "Move", 
+            "move_to": "Component/Frame", 
+            "component": "ViaPoint2", 
+            "position_frame": "", 
+            "align_to_target": false
+          }, 
+          {
+            "type": "SendSignal", 
+            "component": "Rolling Steel Door #2", 
+            "boolean_signal": "IN_J1_Action", 
+            "signal_value": false
+          }
+        ]
+      }, 
+      {
+        "id": "Enter Door 3", 
+        "enabled": false, 
+        "steps": [
+          {
+            "type": "SendSignal", 
+            "component": "Rolling Steel Door #3", 
+            "boolean_signal": "IN_J1_Action", 
+            "signal_value": true
+          }, 
+          {
+            "type": "WaitSignal", 
+            "component": "Rolling Steel Door #3", 
+            "boolean_signal": "OUT_J1_UpState", 
+            "signal_value": true, 
+            "wait_trigger": false, 
+            "timeout": 0.0
+          }, 
+          {
+            "type": "Move", 
+            "move_to": "Component/Frame", 
+            "component": "ViaPoint4", 
+            "position_frame": "", 
+            "align_to_target": false
+          }, 
+          {
+            "type": "SendSignal", 
+            "component": "Rolling Steel Door #3", 
+            "boolean_signal": "IN_J1_Action", 
+            "signal_value": false
+          }
+        ]
+      }, 
+      {
+        "id": "Robot Process", 
+        "enabled": false, 
+        "steps": [
+          {
+            "type": "MoveJoint", 
+            "component": "None", 
+            "joint_name": "J1", 
+            "target_value": 0.0, 
+            "motion_time": 0.0
+          }, 
+          {
+            "type": "RunRobotRoutine", 
+            "robot": "ARC-2000i", 
+            "routine_name": "Sequence1", 
+            "wait_execution": true
+          }, 
+          {
+            "type": "MoveJoint", 
+            "component": "", 
+            "joint_name": "J1", 
+            "target_value": 100.0, 
+            "motion_time": 0.0
+          }
+        ]
+      }
+    ]
+  }
